@@ -88,6 +88,37 @@ function subjIdChanged(subjectId) {
 
 
     //load bubble
+    /*
+    Use otu_ids for the x values.
+    Use sample_values for the y values.
+    Use sample_values for the marker size.
+    Use otu_ids for the marker colors.
+    Use otu_labels for the text values.
+    */
+    var trace1 = {
+        x: subjectSamples[0].otu_ids,
+        y: subjectSamples[0].sample_values,
+        text:subjectSamples[0].otu_labels,
+        mode: 'markers',
+
+        marker: {
+          size: subjectSamples[0].sample_values,
+          color: subjectSamples[0].otu_ids,
+          colorscale:'Portland'
+        }
+      };
+      
+      var data = [trace1];
+      
+      var layout = {
+        title: 'Marker Size',
+        showlegend: false,
+        height: 600,
+        width: 600
+      };
+      
+      Plotly.newPlot('bubble', data, layout);
+
 
 }
 
