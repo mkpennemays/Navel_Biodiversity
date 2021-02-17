@@ -85,7 +85,7 @@ function subjIdChanged(subjectId) {
     // Render the plot to the div tag with id "plot"
     Plotly.newPlot("bar", traceData, layout);
 
-    //load gauge
+    //load gauge //update to get it to update on github
     var data = [
       {
         domain: { x: [0, 1], y: [0, 1] },
