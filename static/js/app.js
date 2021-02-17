@@ -36,7 +36,7 @@ function loadDropdown(idArr){
 
 function subjIdChanged(subjectId) {
     /* metadata consists of:
-        age, bbtype (Innie or Outie), ethnicity, gender, location
+        age, bbtype (Innie or Outie), ethnicity, gender, location, wfreq(scrubs/week)
     */
     var subjectMetaData = metadata.filter(data => data.id == subjectId);
 
@@ -47,6 +47,7 @@ function subjIdChanged(subjectId) {
     let bbType = "";
     (demoData.bbtype == 'I') ? bbType = "Innie" : bbType = "Outie";
     demographics = demographics + "belly button type: " + bbType + "<br>";
+    demographics = demographics + "scrubs/week: " + demoData.wfreq + "<br>";    
     demographics = demographics + "ethnicity: " +demoData.ethnicity + "<br>";
     demographics = demographics + "location: " +demoData.location + "<br>";
 
@@ -85,7 +86,25 @@ function subjIdChanged(subjectId) {
     Plotly.newPlot("bar", traceData, layout);
 
     //load gauge
-
+    var data = [
+      {
+        domain: { x: [0, 1], y: [0, 1] },
+        value: demoData.wfreq,
+        title: { text: "scrubs/week" },
+        type: "indicator",
+        mode: "gauge+number",
+        delta: { reference: 3 },
+        gauge: { axis: { range: [null, 7] },
+          'steps' : [
+              {'range': [0, 2], 'color': "brown"},
+              {'range': [2, 4], 'color': "gray"},
+              {'range': [4, 6], 'color': "lightgray"},
+              {'range': [6, 7], 'color': "white"}], }
+      }
+    ];
+    
+    var layout = { width: 400, height: 300 };
+    Plotly.newPlot('gauge', data, layout);
 
     //load bubble
     /*
@@ -104,7 +123,7 @@ function subjIdChanged(subjectId) {
         marker: {
           size: subjectSamples[0].sample_values,
           color: subjectSamples[0].otu_ids,
-          colorscale:'Portland'
+          colorscale:'Rainbow'
         }
       };
       
