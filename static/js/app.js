@@ -130,10 +130,17 @@ function subjIdChanged(subjectId) {
       var data = [trace1];
       
       var layout = {
-        title: 'Marker Size',
         showlegend: false,
         height: 600,
-        width: 600
+        width: 900,
+        xaxis: {
+          title: 'OTU ID',
+          titlefont: {
+            family: 'Arial, sans-serif',
+            size: 18,
+            color: 'green'
+          }
+        }
       };
       
       Plotly.newPlot('bubble', data, layout);
